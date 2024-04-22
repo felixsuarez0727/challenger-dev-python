@@ -97,6 +97,7 @@ After logging in, you can start registering people, vehicles and officers.
 ![Vehicle registration panel](doc/registrationPanel-2.png)
 
 ## API Usage
+Before you start using the endpoints, make sure you have entered records in the administration panel.
 
 ### Generate Tokens
 To generate API access tokens, you must send a JSON with `username` and `password` for an officer account. You can send a POST request to the URL:`http://localhost:8000/api/v1/generar-token` or use the following `curl` command to get the token:
