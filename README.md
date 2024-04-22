@@ -51,13 +51,6 @@ This project implements a traffic offenses registration system in Python using t
     cd traffic-offences
     ```
 
-3. Prepare the database:
-
-    ```
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
-
 3. Run the application:
 
     ```
