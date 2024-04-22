@@ -10,8 +10,8 @@ class Person(models.Model):
 
 class Vehicle(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    license_plate = models.CharField(max_length=20)
-    brand = models.CharField(max_length=100)
+    license_plate = models.CharField(max_length=20, unique=True, verbose_name="placa_patente")
+    brand = models.CharField(max_length=100, verbose_name="marca")
     color = models.CharField(max_length=50)
 
     def __str__(self):

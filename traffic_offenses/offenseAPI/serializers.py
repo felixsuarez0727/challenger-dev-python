@@ -1,41 +1,46 @@
 from rest_framework import serializers
 from management.models import Officer, Vehicle, Person
 from .models import Offense
-from rest_framework.authtoken.models import Token
+from django.core.exceptions import ObjectDoesNotExist
 
 class OffenseSerializer(serializers.ModelSerializer):
-    placa_patente = serializers.CharField(source='plate_number')
+    vehicle = serializers.CharField(required=True)
     timestamp = serializers.CharField()
     comentarios = serializers.CharField(source='comments')
 
     class Meta:
         model = Offense
-        fields = ['placa_patente', 'timestamp', 'comentarios']
+        fields = ['vehicle', 'timestamp', 'comentarios']
+    
+    def create(self, validated_data):
+        license_plate = validated_data.pop('vehicle', None)
+        try:
+            vehicle = Vehicle.objects.get(license_plate=license_plate)
+        except ObjectDoesNotExist:
+            raise serializers.ValidationError({"placa_patente": "No se encontró un vehículo con esa placa."})
+        
+        offense = Offense(vehicle=vehicle, **validated_data)
+        offense.save()
+        return offense
 
+class OffenseSerializerOut(serializers.ModelSerializer):
+    timestamp = serializers.CharField()
+    comentarios = serializers.CharField(source='comments')
+
+    class Meta:
+        model = Offense
+        fields = ['timestamp', 'comentarios']
+        
 class VehicleSerializer(serializers.ModelSerializer):
+    infracciones = OffenseSerializerOut(many=True, read_only=True)
+    placa_patente = serializers.CharField(source='license_plate', label='placa_patente')
+    marca = serializers.CharField(source='brand', label='marca')
+
     class Meta:
         model = Vehicle
-        fields = ['license_plate', 'brand', 'color', 'owner']
+        fields = ['placa_patente', 'marca', 'color', 'infracciones']
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = ['name', 'email']
-
-class OfficerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Officer
-        fields = ['name', 'identification_number']
-
-class TokenSerializer(serializers.ModelSerializer):
-    officer = OfficerSerializer()
-
-    class Meta:
-        model = Token
-        fields = ['key', 'officer']
-
-    def create(self, validated_data):
-        officer_data = validated_data.pop('officer')
-        officer = Officer.objects.create(**officer_data)
-        token = Token.objects.create(user=officer)
-        return token

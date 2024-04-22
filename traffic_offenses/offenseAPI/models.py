@@ -1,14 +1,15 @@
 from django.db import models
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny
+from management.models import Vehicle
 
 class Offense(models.Model):
-    plate_number = models.CharField(max_length=20, verbose_name="placa_patente")
+    vehicle = models.ForeignKey(Vehicle, related_name='infracciones', on_delete=models.CASCADE, verbose_name="license_plate")
     timestamp = models.TextField(verbose_name="timestamp")
     comments = models.TextField(verbose_name="comentarios")
 
     def __str__(self):
-        return f"Infracción: {self.plate_number} - {self.timestamp}"
+        return f"Infracción: {self.vehicle} - {self.timestamp}"
 
     class Meta:
         verbose_name = "infracción"
