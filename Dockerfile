@@ -13,6 +13,10 @@ COPY . .
 
 WORKDIR /app/traffic_offenses
 
+# Migrar la base de datos
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+
 # Exponer el puerto que usará Django
 EXPOSE 8000
 
