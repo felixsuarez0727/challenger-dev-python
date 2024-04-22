@@ -54,6 +54,7 @@ This project implements a traffic offenses registration system in Python using t
 3. Prepare database:
 
     ```
+    python manage.py makemigrations
     python manage.py migrate
     ```
 
