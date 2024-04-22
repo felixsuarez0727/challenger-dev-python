@@ -77,25 +77,25 @@ This project implements a traffic offenses registration system in Python using t
 
 ## API Usage
 
-### Generating Tokens
+### Generate Tokens
 To generate tokens for API access, you must send a JSON with `username` and `password` for an officer account. Use the following `curl` command to obtain the token:
 
-```
-curl -X POST -H "Content-Type: application/json" -d '{"username": "superusertraffic", "password": "superuserpass"}' http://localhost:8000/api/v1/generar-token
-```
+    ```
+    curl -X POST -H "Content-Type: application/json" -d '{"username": "superusertraffic", "password": "superuserpass"}' http://localhost:8000/api/v1/generar-token
+    ```
 
 ### Upload Offense
 This endpoint requires authorization using a Bearer token. To upload an offense, attach the token in the Authorization header of the POST request:
 You can access the through endpoint
 
-```
-http://localhost:8000/api/v1/cargar_infraccion
-```
+    ```
+    http://localhost:8000/api/v1/cargar_infraccion
+    ```
 
 ### Generate Report
 This endpoint does not require authorization and receives an email parameter to generate a report for the specified person:
 You can access the through endpoint
 
-```
-http://localhost:8000/api/v1/generar_reporte?email=example@example.com
-```
+    ```
+    http://localhost:8000/api/v1/generar_reporte?email=example@example.com
+    ```
