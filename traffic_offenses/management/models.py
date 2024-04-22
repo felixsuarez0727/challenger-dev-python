@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class Person(models.Model):
     name = models.CharField(max_length=100)
@@ -16,9 +17,12 @@ class Vehicle(models.Model):
     def __str__(self):
         return self.license_plate
 
-class Officer(models.Model):
-    name = models.CharField(max_length=100)
+class Officer(AbstractUser):
     identification_number = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.username
+    
+    class Meta:
+        verbose_name = 'Officer'
+        verbose_name_plural = 'Officers'
