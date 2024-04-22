@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "8359e540-6be6-49d3-9bb7-45dcc9e30f67",
+		"name": "Traffic_offenses",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27126985"
+	},
+	"item": [
+		{
+			"name": "Cargar_infracción",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzODE3NDA5LCJpYXQiOjE3MTM4MTcxMDksImp0aSI6IjcxZTUzMGU3NmM3ZDQwMGU5MGQ4ZTU1YTk2ZGVhM2NjIiwidXNlcl9pZCI6M30.enEIYF_pTKMK2OUwHJn9WQiOwIsSHwKHP1bUa6m8UTU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"placa_patente\": \"EDX-UZK\",\r\n  \"timestamp\": \"2023-06-21T11:20:00Z\",\r\n  \"comentarios\": \"Exceso de velocidad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/cargar_infraccion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"cargar_infraccion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generar_reporte",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/generar_reporte?email=TestPerson1@transit.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"generar_reporte"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "TestPerson1@transit.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"TestOfficer1\",\r\n  \"password\": \"superuserpass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/generar-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"generar-token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
