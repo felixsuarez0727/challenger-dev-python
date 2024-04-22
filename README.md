@@ -51,19 +51,38 @@ This project implements a traffic offenses registration system in Python using t
     cd traffic-offences
     ```
 
-3. Run the application:
+3. Prepare database:
+
+    ```
+    python manage.py migrate
+    ```
+
+4. Create  a superuser (Will be needed for admin access):
+
+    ```
+    python manage.py createsuperuser
+    ```
+
+    With credentials
+
+    ```
+    **Username:** superusertraffic
+    **Password:** superuserpass
+    ```
+
+5. Run the application:
 
     ```
     python manage.py runserver
     ```
 
-4. Access the administrative interface in your web browser:
+6. Access the administrative interface in your web browser:
 
     ```
     http://localhost:8000/admin
     ```
 
-5. Enter the following credentials to access the administrative interface:
+7. Enter the following credentials to access the administrative interface:
 
     - **Username:** superusertraffic
     - **Password:** superuserpass
