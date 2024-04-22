@@ -87,14 +87,28 @@ This project implements a traffic offenses registration system in Python using t
     - **Username:** superusertraffic
     - **Password:** superuserpass
 
+![Administration Panel](doc/administrationPanel.png)
+
+After logging in, you can start registering people, vehicles and officers.
+
+![People registration panel](doc/registrationPanel-1.png)
+
+![Vehicle registration panel](doc/registrationPanel-2.png)
+
 ## API Usage
 
 ### Generate Tokens
-To generate tokens for API access, you must send a JSON with `username` and `password` for an officer account. Use the following `curl` command to obtain the token:
+To generate API access tokens, you must send a JSON with `username` and `password` for an officer account. You can send a POST request to the URL:`http://localhost:8000/api/v1/generar-token` or use the following `curl` command to get the token:
 
     ```
-    curl -X POST -H "Content-Type: application/json" -d '{"username": "superusertraffic", "password": "superuserpass"}' http://localhost:8000/api/v1/generar-token
+    curl -X POST http://localhost:8000/api/v1/generar-token -H "Content-Type: application/json" -d "{\"username\":\"TestUser\", \"password\":\"testuserpass\"}"
     ```
+
+Your access token will be the value of the 'access' attribute.
+
+![Generate token](doc/generateToken.png)
+
+Be sure to copy it in full
 
 ### Upload Offense
 This endpoint requires authorization using a Bearer token. To upload an offense, attach the token in the Authorization header of the POST request:
@@ -104,6 +118,8 @@ You can access the through endpoint
     http://localhost:8000/api/v1/cargar_infraccion
     ```
 
+![Upload violation](doc/trafficViolation.png)
+
 ### Generate Report
 This endpoint does not require authorization and receives an email parameter to generate a report for the specified person:
 You can access the through endpoint
@@ -111,3 +127,5 @@ You can access the through endpoint
     ```
     http://localhost:8000/api/v1/generar_reporte?email=example@example.com
     ```
+
+![Generated report](doc/report-1.png)
